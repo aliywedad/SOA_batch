@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import khdev.com.soa.SoaApplication;
+import khdev.com.soa.ApiResponse;
 import khdev.com.soa.models.WeatherData;
 
 @Service
@@ -30,9 +30,10 @@ public class WeatherService {
                 .build();
 
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-
+         System.out.println("Réponse brute de l'API : ");
+        System.out.println(response.body());  
         ObjectMapper objectMapper = new ObjectMapper();
-        SoaApplication apiResponse = objectMapper.readValue(response.body(), SoaApplication.class);
+        ApiResponse apiResponse = objectMapper.readValue(response.body(), ApiResponse.class);  
 
         return apiResponse.getData();
     }
