@@ -7,9 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import khdev.com.soa.Entites.WeatherEntity;
-import khdev.com.soa.repositories.WeatherRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,54 +37,6 @@ public class WeatherService {
 
         return apiResponse.getData();
     }
-
-
-    @Autowired
-    private WeatherRepo weatherRepo; // Injecting the WeatherRepo
-
-    public void saveWeatherData(List<WeatherData> weatherData) {
-        // Loop through each weather data and save to the repository
-        for (WeatherData weather : weatherData) {
-            // Create a new WeatherEntity from WeatherData
-            WeatherEntity weatherEntity = new WeatherEntity();
-            weatherEntity.setDatetime(weather.getDatetime());
-            weatherEntity.setTemp(weather.getTemp());
-            weatherEntity.setAppTemp(weather.getAppTemp());
-            weatherEntity.setSnow(weather.getSnow());
-            weatherEntity.setSolarRad(weather.getSolarRad());
-            weatherEntity.setWindGustSpd(weather.getWindGustSpd());
-            weatherEntity.setPop(weather.getPop());
-            weatherEntity.setOzone(weather.getOzone());
-            weatherEntity.setCloudsHi(weather.getCloudsHi());
-            weatherEntity.setCloudsLow(weather.getCloudsLow());
-            weatherEntity.setTimestampUtc(weather.getTimestampUtc());
-            weatherEntity.setWindCdir(weather.getWindCdir());
-            weatherEntity.setRh(weather.getRh());
-            weatherEntity.setPod(weather.getPod());
-            weatherEntity.setPres(weather.getPres());
-            weatherEntity.setSnowDepth(weather.getSnowDepth());
-            weatherEntity.setClouds(weather.getClouds());
-            weatherEntity.setVis(weather.getVis());
-            weatherEntity.setWindSpd(weather.getWindSpd());
-            weatherEntity.setWindCdirFull(weather.getWindCdirFull());
-            weatherEntity.setSlp(weather.getSlp());
-            weatherEntity.setTimestampLocal(weather.getTimestampLocal());
-            weatherEntity.setTs(weather.getTs());
-            weatherEntity.setDni(weather.getDni());
-            weatherEntity.setDewpt(weather.getDewpt());
-            weatherEntity.setUv(weather.getUv());
-            weatherEntity.setCloudsMid(weather.getCloudsMid());
-            weatherEntity.setWindDir(weather.getWindDir());
-            weatherEntity.setGhi(weather.getGhi());
-            weatherEntity.setDhi(weather.getDhi());
-            weatherEntity.setPrecip(weather.getPrecip());
-
-            // Save the WeatherEntity into the database
-            weatherRepo.save(weatherEntity);
-        }
-    }
-
-
     
 }
 

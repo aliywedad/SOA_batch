@@ -2,10 +2,8 @@ package khdev.com.soa.controller;
 
 import java.util.List;
 
-import khdev.com.soa.repositories.WeatherRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +22,6 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @Autowired
-    private WeatherRepo weatherRepo;
-
-
-
-
-
     @GetMapping("/weather")
     public ResponseEntity<List<WeatherData>> getWeather(
             @RequestParam double latitude, 
@@ -42,10 +33,6 @@ public class WeatherController {
             if (weatherData == null || weatherData.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
-
-
-                weatherService.saveWeatherData(weatherData);
-
 
             return ResponseEntity.ok(weatherData);
         } catch (Exception e) {
