@@ -4,7 +4,7 @@ package khdev.com.soa.Processor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import khdev.com.soa.models.WeatherData;
+import khdev.com.soa.Entities.WeatherData;
 
 @Component
 public class WeatherDataProcessor implements ItemProcessor<WeatherData, WeatherData> {

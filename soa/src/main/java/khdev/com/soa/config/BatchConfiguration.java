@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import khdev.com.soa.Entities.WeatherData;
 import khdev.com.soa.Processor.WeatherDataProcessor;
 import khdev.com.soa.Reader.WeatherDataReader;
 import khdev.com.soa.Writer.WeatherDataWriter;
-import khdev.com.soa.models.WeatherData;
 
 @Configuration
 @EnableBatchProcessing

@@ -1,13 +1,17 @@
 package khdev.com.soa;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import khdev.com.soa.models.WeatherData;
+import khdev.com.soa.Entities.WeatherData;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse {
-    private List<WeatherData> data;
+    List<WeatherData> data = new ArrayList<>();
+    // private List<WeatherData> data;
     private String timezone;
     @JsonProperty("city_name")
     private String cityName;
@@ -15,15 +19,15 @@ public class ApiResponse {
     @JsonProperty("state_code")
     private String stateCode;
     @JsonProperty("country_code")
-    private String country_code;
+    private String countryCode;
     private String lon;
 
     public String getCountryCode() {
-        return country_code;
+        return countryCode;
     }
 
     public void setCountryCode(String country_code) {
-        this.country_code = country_code;
+        this.countryCode = country_code;
     }
 
     public String getLon() {

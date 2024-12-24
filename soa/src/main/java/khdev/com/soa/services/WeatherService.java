@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import khdev.com.soa.ApiResponse;
-import khdev.com.soa.models.WeatherData;
+import khdev.com.soa.Entities.WeatherData;
 
 @Service
 public class WeatherService {
@@ -90,3 +90,5 @@ public class WeatherService {
 
     
 }
+
+

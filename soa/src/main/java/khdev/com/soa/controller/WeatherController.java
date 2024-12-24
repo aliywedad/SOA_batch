@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import khdev.com.soa.models.WeatherData;
+import khdev.com.soa.Entities.WeatherData;
 import khdev.com.soa.services.WeatherService;
 
 @RestController
@@ -35,7 +35,7 @@ public class WeatherController {
     public ResponseEntity<List<WeatherData>> getWeather(
             @RequestParam double latitude, 
             @RequestParam double longitude) {
-        
+
         try {
             List<WeatherData> weatherData = weatherService.fetchWeatherData(latitude, longitude);
 

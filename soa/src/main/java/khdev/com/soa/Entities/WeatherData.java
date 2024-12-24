@@ -1,8 +1,24 @@
-package khdev.com.soa.models;
+package khdev.com.soa.Entities;
+
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "weather_data")
 public class WeatherData {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;  
 
     @JsonProperty("datetime")
     private String datetime;
@@ -97,10 +113,18 @@ public class WeatherData {
     @JsonProperty("precip")
     private double precip;
 
-    @JsonProperty("weather")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "weather_id")
     private Weather weather;
 
-    // Getters and Setters for all fields
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getDatetime() {
         return datetime;
     }
