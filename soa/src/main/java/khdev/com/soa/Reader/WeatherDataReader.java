@@ -11,6 +11,7 @@ import khdev.com.soa.Entities.WeatherData;
 import khdev.com.soa.services.WeatherService;
 
 @Component
+
 public class WeatherDataReader implements ItemReader<WeatherData> {
 
     private final WeatherService weatherService;
