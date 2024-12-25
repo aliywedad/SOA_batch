@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletResponse;
+import khdev.com.soa.Entities.Weather;
 import khdev.com.soa.Entities.WeatherData;
 import khdev.com.soa.repositories.WeatherDataRepository;
+import khdev.com.soa.repositories.WeatherRepository;
 import khdev.com.soa.services.WeatherService;
 import khdev.com.soa.utils.CsvExporter;
 
@@ -22,24 +24,31 @@ public class WeatherController {
     private final WeatherService weatherService;
     private static final Logger logger = LoggerFactory.getLogger(WeatherController.class);
     private final WeatherDataRepository weatherDataRepository;
-
-    public WeatherController(WeatherService weatherService,WeatherDataRepository weatherDataRepository) {
+    private final WeatherRepository weatherRepository;
+    public WeatherController(WeatherService weatherService,WeatherDataRepository weatherDataRepository , WeatherRepository weatherRepository) {
         this.weatherService = weatherService;
         this.weatherDataRepository = weatherDataRepository;
+        this.weatherRepository = weatherRepository;
     }
     @GetMapping("/weather")
-    public ResponseEntity<List<WeatherData>> getWeather(
-            @RequestParam double latitude, 
-            @RequestParam double longitude) {
-
+    public ResponseEntity<List<WeatherData>> getWeather(@RequestParam double latitude, @RequestParam double longitude) {
         try {
-            List<WeatherData> weatherData = weatherService.fetchWeatherData(latitude, longitude);
+            List<WeatherData> weatherDataList = weatherService.fetchWeatherData(latitude, longitude);
 
-            if (weatherData == null || weatherData.isEmpty()) {
+            for (WeatherData weatherData : weatherDataList) {
+                Weather weather = weatherData.getWeather();
+                if (weather != null && weather.getId() == null) {
+                    weatherRepository.save(weather); 
+                }
+            }
+
+            weatherDataRepository.saveAll(weatherDataList);
+
+            if (weatherDataList.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
 
-            return ResponseEntity.ok(weatherData);
+            return ResponseEntity.ok(weatherDataList);
         } catch (Exception e) {
             logger.error("Error fetching weather data", e);
             return ResponseEntity.status(500).body(null);

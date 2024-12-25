@@ -30,8 +30,8 @@ public class WeatherService {
                 .build();
 
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-         System.out.println("Réponse brute de l'API : ");
-        System.out.println(response.body());  
+        //  System.out.println("Réponse brute de l'API : ");
+        // System.out.println(response.body());  
         ObjectMapper objectMapper = new ObjectMapper();
         ApiResponse apiResponse = objectMapper.readValue(response.body(), ApiResponse.class);  
 

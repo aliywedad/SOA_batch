@@ -3,12 +3,11 @@ package khdev.com.soa.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -113,8 +112,7 @@ public class WeatherData {
     @JsonProperty("precip")
     private double precip;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "weather_id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Weather weather;
 
     public Long getId() {
