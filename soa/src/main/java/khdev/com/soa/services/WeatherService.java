@@ -17,8 +17,16 @@ import khdev.com.soa.Entities.WeatherData;
 @Service
 public class WeatherService {
 
+
+
+//client.prepare("GET", "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly?lat=35.5&lon=-78.5&units=imperial&lang=en")
+//        .setHeader("x-rapidapi-key", "ce594f7257msh48b8eac801c7db4p1e0bb1jsn0401f231056a")
+//	.setHeader("x-rapidapi-host", "weatherbit-v1-mashape.p.rapidapi.com")
+
+
+
     private static final String API_URL = "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly";
-    private static final String API_KEY = "79dc62c3e7msh6175c0e0ec06696p17e917jsnee12f88e4cfa";
+    private static final String API_KEY = "ce594f7257msh48b8eac801c7db4p1e0bb1jsn0401f231056a";
     private static final String API_HOST = "weatherbit-v1-mashape.p.rapidapi.com";
 
     public List<WeatherData> fetchWeatherData(double latitude, double longitude) throws Exception {
