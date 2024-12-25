@@ -15,6 +15,7 @@ import khdev.com.soa.Entities.WeatherData;
 import khdev.com.soa.Processor.WeatherDataProcessor;
 import khdev.com.soa.Reader.WeatherDataReader;
 import khdev.com.soa.Writer.WeatherDataWriter;
+import khdev.com.soa.listeners.JobCompletionNotificationListener;
 
 @Configuration
 @EnableBatchProcessing
@@ -23,13 +24,14 @@ public class BatchConfiguration {
     private final WeatherDataReader weatherDataReader;
     private final ItemProcessor<WeatherData, WeatherData> weatherDataProcessor;
     private final WeatherDataWriter weatherDataWriter;
-
+    private final JobCompletionNotificationListener listeners;
     public BatchConfiguration(WeatherDataReader weatherDataReader,
                               WeatherDataProcessor weatherDataProcessor,
-                              WeatherDataWriter weatherDataWriter) {
+                              WeatherDataWriter weatherDataWriter , JobCompletionNotificationListener listeners) {
         this.weatherDataReader = weatherDataReader;
         this.weatherDataProcessor = weatherDataProcessor;
         this.weatherDataWriter = weatherDataWriter;
+        this.listeners = listeners;
     }
 
     @Bean
@@ -45,6 +47,7 @@ public class BatchConfiguration {
     @Bean
     public Job weatherJob(JobRepository jobRepository, Step weatherStep) {
         return new JobBuilder("weatherJob", jobRepository)
+            .listener(listeners)
             .start(weatherStep)
             .build();
     }
